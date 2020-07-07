@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jnshu.mapper.StudentMapper">
+
+    <resultMap id="StudentResultMap" type="com.jnshu.pojo.Student">
+        <id property="id" column="id" javaType="java.lang.Long"/>
+        <result property="name" column="name" javaType="java.lang.String"/>
+        <result property="qq" column="qq" javaType="java.lang.Long"/>
+        <result property="subject" column="subject" javaType="java.lang.String"/>
+        <result property="joinTime" column="joinTime" javaType="java.lang.Long"/>
+        <result property="school" column="school" javaType="java.lang.String"/>
+        <result property="wish" column="wish" javaType="java.lang.String"/>
+        <result property="instructor" column="instructor" javaType="java.lang.String"/>
+        <result property="knowFrom" column="knowFrom" javaType="java.lang.String"/>
+        <result property="createAt" column="createAt" javaType="java.lang.Long"/>
+        <result property="updateAt" column="updateAt" javaType="java.lang.Long"/>
+    </resultMap>
+
+    <!--插入数据-->
+    <insert id="insertStudent" parameterType="com.jnshu.pojo.Student" useGeneratedKeys="true" keyProperty="id">
+       INSERT INTO student (name,qq,subject,joinTime,school,wish,instructor,knowFrom,createAt,updateAt)
+       VALUES
+       (#{name},
+       #{qq},
+       #{subject},
+       #{joinTime},
+       #{school},
+       #{wish},
+       #{instructor},
+       #{knowFrom},
+       #{createAt},
+       #{updateAt})
+</insert>
+
+    <!--根据名字删除数据-->
+    <delete id="deleteStudent" parameterType="Long">
+       DELETE
+       FROM student
+       WHERE id = #{id}
+   </delete>
+
+    <!-- 更新数据-->
+    <update id="updateStudent" parameterType="com.jnshu.pojo.Student">
+       UPDATE student
+       SET
+       name=#{name},
+       qq=#{qq},
+       subject=#{subject},
+       joinTime=#{joinTime},
+       school=#{school},
+       wish=#{wish},
+       instructor=#{instructor},
+       knowFrom=#{knowFrom},
+       createAt=#{createAt},
+       updateAt=#{updateAt}
+       WHERE ID = #{id}
+   </update>
+
+
+
+    <!-- 根据id查询数据-->
+    <select id="findStudentById" parameterType="long" resultMap="StudentResultMap">
+       SELECT *
+       from student
+where id = #{id}
+   </select>
+
+    <!--查询所有的数据-->
+    <select id="findAllStudent" resultMap="StudentResultMap">
+       SELECT *
+       from student
+</select>
+</mapper>
